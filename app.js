@@ -1,3 +1,14 @@
+
+// EnterKeyAdded
+
+document.getElementById("search")
+    .addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.key === "Enter") {
+        document.getElementById("search-btn").click();
+    }
+});
+
 const imagesArea = document.querySelector('.images');
 const gallery = document.querySelector('.gallery');
 const galleryHeader = document.querySelector('.gallery-header');
@@ -31,7 +42,7 @@ const showImages = (images) => {
 const getImages = (query) => {
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
-    .then(data => showImages(data.hitS))
+    .then(data => showImages(data.hits))
     .catch(err => console.log(err))
 }
 
@@ -48,7 +59,8 @@ const selectItem = (event, img) => {
   }
 }
 var timer
-const createSlider = () => {
+const  createSlider = () => {
+  
   // check slider image length
   if (sliders.length < 2) {
     alert('Select at least 2 image.')
@@ -72,7 +84,6 @@ const createSlider = () => {
     let item = document.createElement('div')
     item.className = "slider-item";
     item.innerHTML = `<img class="w-100"
-    src="${slide}"
     alt="">`;
     sliderContainer.appendChild(item)
   })
