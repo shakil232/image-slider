@@ -7,6 +7,7 @@ document.getElementById("search")
     if (event.key === "Enter") {
         document.getElementById("search-btn").click();
     }
+    
 });
 
 const imagesArea = document.querySelector('.images');
@@ -35,15 +36,16 @@ const showImages = (images) => {
     div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
     div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
     gallery.appendChild(div)
+   
   })
-
+  toggleSpinner()
 }
 
 const getImages = (query) => {
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
     .then(data => showImages(data.hits))
-    .catch(err => console.log(err))
+    .catch( error => displayError("Sorry!!Your Search Don't Matching!please Try Again.."))   
 }
 
 let slideIndex = 0;
@@ -55,7 +57,8 @@ const selectItem = (event, img) => {
   
   if (item === -1) {
     sliders.push(img);
-  } else {
+  } 
+  else {
     alert('Hey, Already added !')
   }
 }
@@ -94,6 +97,7 @@ const  createSlider = () => {
     slideIndex++;
     changeSlide(slideIndex);
   }, duration);
+  
 }
 
 // change slider index 
@@ -128,8 +132,20 @@ searchBtn.addEventListener('click', function () {
   const search = document.getElementById('search');
   getImages(search.value)
   sliders.length = 0;
+  toggleSpinner()
 })
 
 sliderBtn.addEventListener('click', function () {
   createSlider()
 })
+
+const toggleSpinner = () =>{
+  const spinner = document.getElementById('loading-spinner');
+  spinner.classList.toggle('d-none')
+  const img= document.getElementById('image');
+  img.classList.toggle('d-none')
+}
+
+const displayError = error =>{
+  document.getElementById('error').innerText =error;
+}
