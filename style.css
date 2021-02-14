@@ -1,3 +1,14 @@
+
+body{
+background-color: LavenderBlush ;
+}
+#header{
+  font-size: 40px;
+  font-weight: 500;
+  text-transform:capitalize;
+  font-family: 'Indie Flower', cursive;
+  color:tomato;
+}
 #sliders {
   height: 400px;
   width: 60%;

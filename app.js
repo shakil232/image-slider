@@ -52,6 +52,7 @@ const selectItem = (event, img) => {
   element.classList.add('added');
  
   let item = sliders.indexOf(img);
+  
   if (item === -1) {
     sliders.push(img);
   } else {
@@ -79,7 +80,7 @@ const  createSlider = () => {
   document.querySelector('.main').style.display = 'block';
   // hide image aria
   imagesArea.style.display = 'none';
-  const duration = document.getElementById('duration').value || 1000;
+  const duration = document.getElementById('duration').value ||1000;
   sliders.forEach(slide => {
     let item = document.createElement('div')
     item.className = "slider-item";
